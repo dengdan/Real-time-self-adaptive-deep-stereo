@@ -148,7 +148,6 @@ class dataset():
             left_image,right_image,gt_image = preprocessing.random_crop(self._crop_shape, [left_image,right_image,gt_image])
         else:
             (left_image,right_image,gt_image) = [tf.image.resize_image_with_crop_or_pad(x,self._crop_shape[0],self._crop_shape[1]) for x in [left_image,right_image,gt_image]]
-        
         if self._augment:
             left_image,right_image=preprocessing.augment(left_image,right_image)
         return [left_image,right_image,gt_image]
