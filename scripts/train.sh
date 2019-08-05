@@ -1,7 +1,12 @@
 python Train.py \
-  --trainingSet datasets/flyingthings3d_monkaa_scene_flow.csv\
+  --trainingSet datasets/flyingthings3d.csv\
   --imageShape 320 512\
   --validationSet datasets/Stereo2015.csv\
   --output /data/temp/models/MadNet\
-  --lossWeights 1 1 1 1 1 1 1\
-  --batchSize 1
+  --lossWeights 1 0.005 0.01 0.02 0.08 0.32\
+  --augment \
+  --modelName MADNet\
+  --lossType "sum_l1"\
+  --lr 0.0001\
+  --decayStep 400000\
+  --batchSize 4
