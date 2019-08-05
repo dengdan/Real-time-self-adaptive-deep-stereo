@@ -113,7 +113,7 @@ class dataset():
         shuffle=True):
     
         if not os.path.exists(path_file):
-            raise Exception('File not found during dataset construction')
+            raise Exception('File not found during dataset construction' + path_file)
     
         self._path_file = path_file
         self._batch_size=batch_size
