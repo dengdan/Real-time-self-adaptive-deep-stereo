@@ -194,3 +194,22 @@ class dataset():
     def get_couples(self):
         return self._couples
 
+if __name__ == "__main__":
+    import util
+    data_set = dataset(
+        "datasets/flyingthings3d.csv",
+        batch_size = 1,
+        crop_shape=[320,512],
+        num_epochs=2,
+        augment=True,
+        is_training=True,
+        shuffle=True
+    )
+    left_img_batch, right_img_batch, gt_image_batch = data_set.get_batch()
+    with tf.Session() as sess:
+        sess.run([tf.global_variables_initializer(),tf.local_variables_initializer()])
+        left_img_b, right_image_b, gt_image_b = sess.run([left_img_batch, right_img_batch, gt_image_batch])
+        images = [I[0, ...] for I in [left_img_b, right_image_b, gt_image_b[..., 0]]]
+        images = [np.asarray(I, dtype = np.uint8) for I in images]
+        util.plt.show_images(images = images)
+        
